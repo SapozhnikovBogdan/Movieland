@@ -1,0 +1,3 @@
+INSERT INTO movie (id, name_russian, name_native, year_of_release, rating, price, picture_path) VALUES (6, 'Начало', 'Inception', 2010, 8.6,130.00,'https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1._SY209_CR0,0,140,209_.jpg');
+INSERT INTO movie (id, name_russian, name_native, year_of_release, rating, price, picture_path) VALUES (7, 'Жизнь прекрасна', 'La vita è bella', 1997, 8.2, 145.99, 'https://images-na.ssl-images-amazon.com/images/M/MV5BYmJmM2Q4NmMtYThmNC00ZjRlLWEyZmItZTIwOTBlZDQ3NTQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1._SY209_CR0,0,140,209_.jpg');
+
