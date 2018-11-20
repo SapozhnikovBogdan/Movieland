@@ -2,7 +2,6 @@ package com.sapozhnikov.movieland.dao.jdbc.mapper;
 
 import com.sapozhnikov.movieland.entity.Movie;
 import org.junit.Test;
-import org.springframework.test.annotation.DirtiesContext;
 
 import java.sql.ResultSet;
 
@@ -10,7 +9,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class MovieRowMapperTest {
     @Test
     public void testMapRow() throws Exception {

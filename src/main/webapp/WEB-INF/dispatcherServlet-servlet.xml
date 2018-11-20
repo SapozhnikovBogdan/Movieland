@@ -12,9 +12,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.sapozhnikov.movieland.controller"/>
-    <context:property-placeholder location="classpath:application.properties" />
 
     <mvc:annotation-driven/>
-
 
 </beans>

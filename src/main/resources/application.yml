@@ -1,0 +1,8 @@
+jdbc:
+  driver : org.postgresql.Driver
+  url : jdbc:postgresql://localhost:5432/movieland
+  username : postgres
+  password : root
+  dbcp2 :
+    max_total : 5
+    max_wait_millis : 20

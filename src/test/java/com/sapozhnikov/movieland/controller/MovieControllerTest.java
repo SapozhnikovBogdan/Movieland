@@ -1,10 +1,14 @@
 package com.sapozhnikov.movieland.controller;
 
+import com.sapozhnikov.movieland.dao.MovieDao;
 import com.sapozhnikov.movieland.entity.Movie;
 import com.sapozhnikov.movieland.service.MovieService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
@@ -31,16 +35,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @DirtiesContext
 public class MovieControllerTest {
-
+    @Autowired
     private WebApplicationContext webApplicationContext;
 
-    private MovieService movieService;
+    @Autowired
+    @InjectMocks
+    MovieService movieService;
+
+    @Mock
+    MovieDao movieDao;
+
+    @Before
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testGetMovies() throws Exception {
-
-        Mockito.reset(movieService);
-
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
         Movie movie = new Movie();
@@ -52,10 +63,9 @@ public class MovieControllerTest {
         movie.setRating(8.6);
         movie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1._SY209_CR0,0,140,209_.jpg");
 
-
         when(movieService.getAll()).thenReturn(Collections.singletonList(movie));
 
-        mockMvc.perform(get("/v1/movie"))
+        mockMvc.perform(get("/movie"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -66,17 +76,5 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$[0].rating", equalTo(8.6)))
                 .andExpect(jsonPath("$[0].price", equalTo(130.0)))
                 .andExpect(jsonPath("$[0].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1._SY209_CR0,0,140,209_.jpg")));
-
-
-    }
-
-    @Autowired
-    public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
-        this.webApplicationContext = webApplicationContext;
-    }
-
-    @Autowired
-    public void setMovieService(MovieService movieService) {
-        this.movieService = movieService;
     }
 }
