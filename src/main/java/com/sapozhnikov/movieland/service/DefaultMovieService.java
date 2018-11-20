@@ -20,5 +20,4 @@ public class DefaultMovieService implements MovieService {
     public List<Movie> getAll() {
         return movieDao.getAll();
     }
-
 }

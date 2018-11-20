@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public class JdbcMovieDao implements MovieDao {
     private static final MovieRowMapper MOVIE_ROW_MAPPER = new MovieRowMapper();
-
     private JdbcTemplate jdbcTemplate;
     private String getAllMovieSql;
 
@@ -20,7 +19,6 @@ public class JdbcMovieDao implements MovieDao {
     public JdbcMovieDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
 
     @Override
     public List<Movie> getAll() {
@@ -31,5 +29,4 @@ public class JdbcMovieDao implements MovieDao {
     public void setGetAllMovieSql(String getAllMovieSql) {
         this.getAllMovieSql = getAllMovieSql;
     }
-
 }

@@ -18,7 +18,6 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"file:src/main/resources/spring/root-context.xml", "file:src/main/webapp/WEB-INF/dispatcherServlet-servlet.xml", "classpath:/spring/test-context.xml"})
 @DirtiesContext
 public class JdbcMovieDaoTest {
-
     private MovieDao movieDao;
 
     @Autowired
@@ -29,6 +28,7 @@ public class JdbcMovieDaoTest {
     @Test
     public void testGetAll() throws Exception {
         List<Movie> expectedMovies = new ArrayList<>();
+
         Movie movie1 = new Movie();
         movie1.setId(6);
         movie1.setNameRussian("Начало");
@@ -56,7 +56,5 @@ public class JdbcMovieDaoTest {
         for (Movie expectedMovie : expectedMovies) {
             assertTrue(actualMovies.contains(expectedMovie));
         }
-
     }
-
 }

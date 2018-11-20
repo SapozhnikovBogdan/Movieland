@@ -7,17 +7,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-@DirtiesContext
 public class DefaultMovieServiceTest {
 
     @Mock
@@ -28,8 +25,8 @@ public class DefaultMovieServiceTest {
 
     @Test
     public void getAll() throws Exception {
-
         List<Movie> expectedMovies = new ArrayList<>();
+
         Movie movie1 = new Movie();
         movie1.setId(6);
         movie1.setNameRussian("Начало");
@@ -59,7 +56,6 @@ public class DefaultMovieServiceTest {
         for (Movie expectedMovie : expectedMovies) {
             assertTrue(actualMovies.contains(expectedMovie));
         }
-
     }
 
 }

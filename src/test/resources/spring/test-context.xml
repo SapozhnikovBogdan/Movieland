@@ -14,8 +14,4 @@
         <jdbc:script location="classpath:database/db-test-data.sql" />
     </jdbc:embedded-database>
 
-    <bean id="movieService" class="org.mockito.Mockito" factory-method="mock">
-        <constructor-arg value="com.sapozhnikov.movieland.service.MovieService" />
-    </bean>
-
 </beans>
