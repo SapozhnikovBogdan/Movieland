@@ -4,12 +4,10 @@ import com.sapozhnikov.movieland.dao.MovieDao;
 import com.sapozhnikov.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.sapozhnikov.movieland.entity.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Queue;
 
 @Repository
 public class JdbcMovieDao implements MovieDao {

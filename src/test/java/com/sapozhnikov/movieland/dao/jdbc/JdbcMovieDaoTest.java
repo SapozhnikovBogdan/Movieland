@@ -30,8 +30,6 @@ public class JdbcMovieDaoTest {
 
     @Test
     public void testGetAll() throws Exception {
-        //List<Movie> expectedMovies = new ArrayList<>();
-
         Movie movie1 = new Movie();
         movie1.setId(6);
         movie1.setNameRussian("Начало");
