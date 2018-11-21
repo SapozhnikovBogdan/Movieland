@@ -6,8 +6,11 @@
 
     <!--Movies's SQL-->
     <bean name="getAllMovieSql" class="java.lang.String">
-        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM movie order by id asc"/>
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM movie"/>
     </bean>
 
+    <bean name="getRandomMovieSql" class="java.lang.String">
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM movie_random ORDER BY RAND() limit 3"/>
+    </bean>
 
 </beans>

@@ -18,6 +18,11 @@ public class MovieController {
         return movieService.getAll();
     }
 
+    @GetMapping(path="/movie/random", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Movie> getRandomMovies(){
+        return movieService.getRandom();
+    }
+
     @Autowired()
     public void setMovieService(MovieService movieService) {
         this.movieService = movieService;

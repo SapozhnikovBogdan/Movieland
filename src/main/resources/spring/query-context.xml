@@ -9,4 +9,8 @@
         <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM public.movie"/>
     </bean>
 
+    <bean name="getRandomMovieSql" class="java.lang.String">
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM public.movie order by random() limit 3"/>
+    </bean>
+
 </beans>

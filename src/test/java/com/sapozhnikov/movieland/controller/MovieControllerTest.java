@@ -77,4 +77,32 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$[0].price", equalTo(130.0)))
                 .andExpect(jsonPath("$[0].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1._SY209_CR0,0,140,209_.jpg")));
     }
+
+    @Test
+    public void testGetRandomMovies() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
+        Movie movie = new Movie();
+        movie.setId(6);
+        movie.setNameRussian("Начало");
+        movie.setNameNative("Inception");
+        movie.setYearOfRelease("2010");
+        movie.setPrice(130.0);
+        movie.setRating(8.6);
+        movie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1._SY209_CR0,0,140,209_.jpg");
+
+        when(movieService.getRandom()).thenReturn(Collections.singletonList(movie));
+
+        mockMvc.perform(get("/movie/random"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].id", equalTo(6)))
+                .andExpect(jsonPath("$[0].nameRussian", equalTo("Начало")))
+                .andExpect(jsonPath("$[0].nameNative", equalTo("Inception")))
+                .andExpect(jsonPath("$[0].yearOfRelease", equalTo("2010")))
+                .andExpect(jsonPath("$[0].rating", equalTo(8.6)))
+                .andExpect(jsonPath("$[0].price", equalTo(130.0)))
+                .andExpect(jsonPath("$[0].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1._SY209_CR0,0,140,209_.jpg")));
+    }
 }
