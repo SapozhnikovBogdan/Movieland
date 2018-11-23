@@ -13,8 +13,6 @@
         <context:exclude-filter type="regex" expression="com\.sapozhnikov\.movieland\.controller\..*"/>
     </context:component-scan>
     
-    <!--<context:property-placeholder location="classpath:application.properties"/>-->
-
     <bean id="yamlProperties" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
         <property name="resources" value="classpath:application.yml"/>
     </bean>
