@@ -2,6 +2,7 @@ package com.sapozhnikov.movieland.dao.jdbc;
 
 import com.sapozhnikov.movieland.dao.MovieDao;
 import com.sapozhnikov.movieland.entity.Movie;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +19,17 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"file:src/main/resources/spring/root-context.xml", "file:src/main/webapp/WEB-INF/dispatcherServlet-servlet.xml", "classpath:/spring/test-context.xml"})
 @DirtiesContext
 public class JdbcMovieDaoTest {
+    private List<Movie> expectedMovies;
+    @Autowired
     private MovieDao movieDao;
 
-    @Autowired
-    public void setMovieDao( MovieDao movieDao) {
-        this.movieDao = movieDao;
+    @Before
+    public void setUp() throws Exception {
+        expectedMovies = new ArrayList<>();
     }
 
     @Test
     public void testGetAll() throws Exception {
-        List<Movie> expectedMovies = new ArrayList<>();
-
         Movie movie1 = new Movie();
         movie1.setId(6);
         movie1.setNameRussian("Начало");
@@ -56,5 +57,12 @@ public class JdbcMovieDaoTest {
         for (Movie expectedMovie : expectedMovies) {
             assertTrue(actualMovies.contains(expectedMovie));
         }
+    }
+
+    @Test
+    public void testGetRandom(){
+        List<Movie> actualMovies = movieDao.getRandom();
+        int expectedRandomMovieCount = 3;
+        assertEquals(expectedRandomMovieCount, actualMovies.size());
     }
 }

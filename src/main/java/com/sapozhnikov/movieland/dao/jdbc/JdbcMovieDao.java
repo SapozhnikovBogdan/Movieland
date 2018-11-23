@@ -14,6 +14,7 @@ public class JdbcMovieDao implements MovieDao {
     private static final MovieRowMapper MOVIE_ROW_MAPPER = new MovieRowMapper();
     private JdbcTemplate jdbcTemplate;
     private String getAllMovieSql;
+    private String getRandomMovieSql;
 
     @Autowired
     public JdbcMovieDao(JdbcTemplate jdbcTemplate) {
@@ -25,8 +26,18 @@ public class JdbcMovieDao implements MovieDao {
         return jdbcTemplate.query(getAllMovieSql, MOVIE_ROW_MAPPER);
     }
 
+    @Override
+    public List<Movie> getRandom() {
+        return jdbcTemplate.query(getRandomMovieSql, MOVIE_ROW_MAPPER);
+    }
+
     @Autowired
     public void setGetAllMovieSql(String getAllMovieSql) {
         this.getAllMovieSql = getAllMovieSql;
+    }
+
+    @Autowired
+    public void setGetRandomMovieSql(String getRandomMovieSql) {
+        this.getRandomMovieSql = getRandomMovieSql;
     }
 }
