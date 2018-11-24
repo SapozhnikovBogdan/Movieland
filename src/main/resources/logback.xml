@@ -10,7 +10,7 @@
         <file>movieland.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>log/%d{yyyy-MM, aux}/movieland-%d{yyyy-MM-dd}.%i</fileNamePattern>
-            <maxFileSize>5KB</maxFileSize>
+            <maxFileSize>5MB</maxFileSize>
         </rollingPolicy>
         <encoder>
             <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>

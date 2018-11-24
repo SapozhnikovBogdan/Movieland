@@ -18,13 +18,13 @@ public class MovieController {
 
     @GetMapping(path="/movie", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Movie> getMovies(){
-        logger.info("Get request came by path /movie" );
+        logger.info("HTTP GET request came by path /movie");
         return movieService.getAll();
     }
 
     @GetMapping(path="/movie/random", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Movie> getRandomMovies(){
-        logger.info("Get request came by path /movie/random" );
+        logger.info("Get request came by path /movie/random");
         return movieService.getRandom();
     }
 
