@@ -21,3 +21,11 @@ CREATE TABLE movie_random
 	price double precision default 0,
 	picture_path varchar(4000)
 )
+;
+
+CREATE TABLE genre
+(
+	id   INTEGER IDENTITY PRIMARY KEY,
+	name VARCHAR(100)
+)
+;

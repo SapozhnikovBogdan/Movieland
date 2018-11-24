@@ -13,4 +13,9 @@
         <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM movie_random ORDER BY RAND() limit 3"/>
     </bean>
 
+    <!--Genre's SQL-->
+    <bean name="getAllGenreSql" class="java.lang.String">
+        <constructor-arg value="SELECT id, name FROM genre"/>
+    </bean>
+
 </beans>
