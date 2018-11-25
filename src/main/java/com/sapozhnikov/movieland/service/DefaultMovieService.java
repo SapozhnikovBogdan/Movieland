@@ -32,4 +32,11 @@ public class DefaultMovieService implements MovieService {
         logger.debug("Service method getRandom returned {} movies", movies.size());
         return movies;
     }
+
+    @Override
+    public List<Movie> getByGenre(int id) {
+        List<Movie> movies = movieDao.getByGenre(id);
+        logger.debug("Service method getByGenre returned {} movies", movies.size());
+        return movies;
+    }
 }

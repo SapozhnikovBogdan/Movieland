@@ -23,6 +23,7 @@ import java.util.Collections;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -104,5 +105,34 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$[0].rating", equalTo(8.6)))
                 .andExpect(jsonPath("$[0].price", equalTo(130.0)))
                 .andExpect(jsonPath("$[0].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1._SY209_CR0,0,140,209_.jpg")));
+    }
+
+    @Test
+    public void testGetMoviesByGenre() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
+        Movie movie = new Movie();
+        movie.setId(11);
+        movie.setNameRussian("Унесённые призраками");
+        movie.setNameNative("Sen to Chihiro no kamikakushi");
+        movie.setYearOfRelease("2001");
+        movie.setRating(8.6);
+        movie.setPrice(145.90);
+        movie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BOGJjNzZmMmUtMjljNC00ZjU5LWJiODQtZmEzZTU0MjBlNzgxL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1._SY209_CR0,0,140,209_.jpg");
+
+        when(movieService.getByGenre(anyInt())).thenReturn(Collections.singletonList(movie));
+
+        int familyGenreId = 14;
+        mockMvc.perform(get("/movie/genre/{genreId}", new Object[]{familyGenreId}))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].id", equalTo(11)))
+                .andExpect(jsonPath("$[0].nameRussian", equalTo("Унесённые призраками")))
+                .andExpect(jsonPath("$[0].nameNative", equalTo("Sen to Chihiro no kamikakushi")))
+                .andExpect(jsonPath("$[0].yearOfRelease", equalTo("2001")))
+                .andExpect(jsonPath("$[0].rating", equalTo(8.6)))
+                .andExpect(jsonPath("$[0].price", equalTo(145.90)))
+                .andExpect(jsonPath("$[0].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BOGJjNzZmMmUtMjljNC00ZjU5LWJiODQtZmEzZTU0MjBlNzgxL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1._SY209_CR0,0,140,209_.jpg")));
     }
 }

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,8 +25,14 @@ public class MovieController {
 
     @GetMapping(path="/movie/random", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Movie> getRandomMovies(){
-        logger.info("Get request came by path /movie/random");
+        logger.info("HTTP GET request came by path /movie/random");
         return movieService.getRandom();
+    }
+
+    @GetMapping(path="/movie/genre/{genreId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Movie> getMoviesByGenre(@PathVariable int genreId){
+        logger.info("HTTP GET request came by path /movie/genre/{}", genreId);
+        return movieService.getByGenre(genreId);
     }
 
     @Autowired()
