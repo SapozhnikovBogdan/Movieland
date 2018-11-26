@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -86,6 +87,41 @@ public class DefaultMovieServiceTest {
         when(movieDao.getRandom()).thenReturn(expectedMovies);
 
         List<Movie> actualMovies = movieService.getRandom();
+
+        assertEquals(expectedMovies.size(), actualMovies.size());
+        for (Movie expectedMovie : expectedMovies) {
+            assertTrue(actualMovies.contains(expectedMovie));
+        }
+    }
+
+    @Test
+    public void testGetByGenre() throws Exception {
+        List<Movie> expectedMovies = new ArrayList<>();
+
+        Movie movie1 = new Movie();
+        movie1.setId(11);
+        movie1.setNameRussian("Унесённые призраками");
+        movie1.setNameNative("Sen to Chihiro no kamikakushi");
+        movie1.setYearOfRelease("2001");
+        movie1.setPrice(145.90);
+        movie1.setRating(8.6);
+        movie1.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BOGJjNzZmMmUtMjljNC00ZjU5LWJiODQtZmEzZTU0MjBlNzgxL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1._SY209_CR0,0,140,209_.jpg");
+
+        Movie movie2 = new Movie();
+        movie2.setId(18);
+        movie2.setNameRussian("Как приручить дракона");
+        movie2.setNameNative("How to Train Your Dragon");
+        movie2.setYearOfRelease("2010");
+        movie2.setPrice(182.00);
+        movie2.setRating(8.2);
+        movie2.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMjA5NDQyMjc2NF5BMl5BanBnXkFtZTcwMjg5ODcyMw@@._V1._SY209_CR0,0,140,209_.jpg");
+
+        expectedMovies.add(movie1);
+        expectedMovies.add(movie2);
+
+        when(movieDao.getByGenre(anyInt())).thenReturn(expectedMovies);
+
+        List<Movie> actualMovies = movieService.getByGenre(anyInt());
 
         assertEquals(expectedMovies.size(), actualMovies.size());
         for (Movie expectedMovie : expectedMovies) {

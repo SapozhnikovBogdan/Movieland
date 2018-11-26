@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class DefaultMovieService implements MovieService {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private MovieDao movieDao;
 
     @Autowired
@@ -30,6 +30,13 @@ public class DefaultMovieService implements MovieService {
     public List<Movie> getRandom() {
         List<Movie> movies = movieDao.getRandom();
         logger.debug("Service method getRandom returned {} movies", movies.size());
+        return movies;
+    }
+
+    @Override
+    public List<Movie> getByGenre(int id) {
+        List<Movie> movies = movieDao.getByGenre(id);
+        logger.debug("Service method getByGenre returned {} movies", movies.size());
         return movies;
     }
 }

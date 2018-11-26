@@ -3,7 +3,7 @@ INSERT INTO movie (id, name_russian, name_native, year_of_release, rating, price
 INSERT INTO movie (id, name_russian, name_native, year_of_release, rating, price, picture_path) VALUES (7, 'Жизнь прекрасна', 'La vita è bella', 1997, 8.2, 145.99, 'https://images-na.ssl-images-amazon.com/images/M/MV5BYmJmM2Q4NmMtYThmNC00ZjRlLWEyZmItZTIwOTBlZDQ3NTQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1._SY209_CR0,0,140,209_.jpg');
 
 --Data for get_random_movies testing
-insert into movie_random(name_russian, name_native, year_of_release, description, rating, price, picture_path)
+insert into movie_random(name_russian, name_native, year_of_release, description , rating, price, picture_path)
 values
   ('Титаник','Titanic','1997','Молодые влюбленные Джек и Роза находят друг друга в первом и последнем плавании «непотопляемого» Титаника. Они не могли знать, что шикарный лайнер столкнется с айсбергом в холодных водах Северной Атлантики, и их страстная любовь превратится в схватку со смертью…',7.9,150.00,'https://images-na.ssl-images-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1._SY209_CR0,0,140,209_.jpg');
 insert into movie_random(name_russian, name_native, year_of_release, description, rating, price, picture_path)
@@ -24,3 +24,11 @@ values
 insert into movie_random(name_russian, name_native, year_of_release, description, rating, price, picture_path)
 values
   ('Как приручить дракона','How to Train Your Dragon','2010','Вы узнаете историю подростка Иккинга, которому не слишком близки традиции его героического племени, много лет ведущего войну с драконами. Мир Иккинга переворачивается с ног на голову, когда он неожиданно встречает дракона Беззубика, который поможет ему и другим викингам увидеть привычный мир с совершенно другой стороны…',8.2,182.00,'https://images-na.ssl-images-amazon.com/images/M/MV5BMjA5NDQyMjc2NF5BMl5BanBnXkFtZTcwMjg5ODcyMw@@._V1._SY209_CR0,0,140,209_.jpg');
+
+--Data for get_movies_by_genre
+insert into movie_by_genre(id, name_russian, name_native, year_of_release, rating, price, picture_path)
+values
+  (11, 'Унесённые призраками','Sen to Chihiro no kamikakushi','2001',8.6,145.90,'https://images-na.ssl-images-amazon.com/images/M/MV5BOGJjNzZmMmUtMjljNC00ZjU5LWJiODQtZmEzZTU0MjBlNzgxL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1._SY209_CR0,0,140,209_.jpg');
+insert into movie_by_genre(id, name_russian, name_native, year_of_release, rating, price, picture_path)
+values
+  (18, 'Как приручить дракона','How to Train Your Dragon','2010',8.2,182.00,'https://images-na.ssl-images-amazon.com/images/M/MV5BMjA5NDQyMjc2NF5BMl5BanBnXkFtZTcwMjg5ODcyMw@@._V1._SY209_CR0,0,140,209_.jpg');

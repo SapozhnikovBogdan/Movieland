@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--Movies's SQL-->
     <bean name="getAllMovieSql" class="java.lang.String">
@@ -11,6 +11,15 @@
 
     <bean name="getRandomMovieSql" class="java.lang.String">
         <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM public.movie order by random() limit 3"/>
+    </bean>
+
+    <bean name="getMovieByGenreSql" class="java.lang.String">
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM public.movie mv join public.movie_genre mg on mv.id = mg.movie_id and mg.genre_id = ?"/>
+    </bean>
+
+    <!--Genre's SQL-->
+    <bean name="getAllGenreSql" class="java.lang.String">
+        <constructor-arg value="SELECT id, name FROM genre"/>
     </bean>
 
 </beans>
