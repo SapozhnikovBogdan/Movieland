@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 public class MovieController {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private MovieService movieService;
 
     @GetMapping(path="/movie", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class DefaultMovieService implements MovieService {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private MovieDao movieDao;
 
     @Autowired
