@@ -6,3 +6,9 @@ jdbc:
   dbcp2 :
     max_total : 5
     max_wait_millis : 20
+
+schedule:
+  cache :
+    genre :
+      fixed_delay : 14400000
+      initial_delay : 14400000

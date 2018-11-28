@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 public class GenreController {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private GenreService defaultGenreService;
 
     @GetMapping(path = "/genre", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
