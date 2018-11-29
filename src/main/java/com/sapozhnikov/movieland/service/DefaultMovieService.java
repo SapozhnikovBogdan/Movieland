@@ -1,5 +1,7 @@
 package com.sapozhnikov.movieland.service;
 
+import com.sapozhnikov.movieland.common.MovieRequestParam;
+import com.sapozhnikov.movieland.common.SqlGenerator;
 import com.sapozhnikov.movieland.dao.MovieDao;
 import com.sapozhnikov.movieland.entity.Movie;
 import org.slf4j.Logger;
@@ -27,6 +29,13 @@ public class DefaultMovieService implements MovieService {
     }
 
     @Override
+    public List<Movie> getAll(MovieRequestParam movieRequestParam) {
+        List<Movie> movies = movieDao.getAll(movieRequestParam);
+        logger.debug("Service method getAll with sorting returned {} movies", movies.size());
+        return movies;
+    }
+
+    @Override
     public List<Movie> getRandom() {
         List<Movie> movies = movieDao.getRandom();
         logger.debug("Service method getRandom returned {} movies", movies.size());
@@ -37,6 +46,13 @@ public class DefaultMovieService implements MovieService {
     public List<Movie> getByGenre(int id) {
         List<Movie> movies = movieDao.getByGenre(id);
         logger.debug("Service method getByGenre returned {} movies", movies.size());
+        return movies;
+    }
+
+    @Override
+    public List<Movie> getByGenre(int id, MovieRequestParam movieRequestParam) {
+        List<Movie> movies = movieDao.getByGenre(id, movieRequestParam);
+        logger.debug("Service method getByGenre with sorting returned {} movies", movies.size());
         return movies;
     }
 }
