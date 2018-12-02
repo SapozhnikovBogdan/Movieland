@@ -1,7 +1,6 @@
 package com.sapozhnikov.movieland.service;
 
 import com.sapozhnikov.movieland.common.MovieRequestParam;
-import com.sapozhnikov.movieland.common.SqlGenerator;
 import com.sapozhnikov.movieland.dao.MovieDao;
 import com.sapozhnikov.movieland.entity.Movie;
 import org.slf4j.Logger;

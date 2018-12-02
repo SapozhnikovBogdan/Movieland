@@ -1,7 +1,6 @@
 package com.sapozhnikov.movieland.dao.jdbc;
 
 import com.sapozhnikov.movieland.common.MovieRequestParam;
-import com.sapozhnikov.movieland.common.SqlGenerator;
 import com.sapozhnikov.movieland.dao.MovieDao;
 import com.sapozhnikov.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.sapozhnikov.movieland.entity.Movie;

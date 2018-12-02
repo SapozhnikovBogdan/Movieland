@@ -33,19 +33,7 @@ public class MovieController {
             return ResponseEntity.ok(movieService.getAll());
         }
 
-        MovieRequestParam movieRequestParam = new MovieRequestParam();
-
-        if (ratingSortDirection != null) {
-            movieRequestParam.setSortDirection(ratingSortDirection);
-            movieRequestParam.setSortField("rating");
-        }
-
-        if (priceSortDirection != null) {
-            movieRequestParam.setSortDirection(priceSortDirection);
-            movieRequestParam.setSortField("price");
-        }
-
-        return ResponseEntity.ok(movieService.getAll(movieRequestParam));
+        return ResponseEntity.ok(movieService.getAll(getMovieRequestParam(ratingSortDirection, priceSortDirection)));
     }
 
     @GetMapping(path="/movie/random", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -60,8 +48,7 @@ public class MovieController {
                                               @RequestParam(name = "price", required = false) SortDirection priceSortDirection){
         logger.info("HTTP GET request came by path /movie/genre/{}", genreId);
 
-        if (ratingSortDirection == SortDirection.ASC || (ratingSortDirection != null && priceSortDirection != null)) {
-            logger.error("Request params {} is not allowed here", ratingSortDirection == SortDirection.ASC ? "rating=ASC" : "rating=" + (ratingSortDirection.name()) + "; price=" + priceSortDirection.name());
+        if (!isValidParams(ratingSortDirection, priceSortDirection)){
             return ResponseEntity.badRequest().build();
         }
 
@@ -69,6 +56,28 @@ public class MovieController {
             return ResponseEntity.ok(movieService.getByGenre(genreId));
         }
 
+        return ResponseEntity.ok(movieService.getByGenre(genreId, getMovieRequestParam(ratingSortDirection, priceSortDirection)));
+    }
+
+    @Autowired()
+    public void setMovieService(MovieService movieService) {
+        this.movieService = movieService;
+    }
+
+    @InitBinder
+    public void initBinder(final WebDataBinder webdataBinder) {
+        webdataBinder.registerCustomEditor(SortDirection.class, new SortDirectionConverter());
+    }
+
+    private boolean isValidParams(SortDirection ratingSortDirection, SortDirection priceSortDirection){
+        if (ratingSortDirection == SortDirection.ASC || (ratingSortDirection != null && priceSortDirection != null)) {
+            logger.error("Request params {} is not allowed here", ratingSortDirection == SortDirection.ASC ? "rating=ASC" : "rating=" + (ratingSortDirection.name()) + "; price=" + priceSortDirection.name());
+            return false;
+        }
+        return true;
+    }
+
+    private MovieRequestParam getMovieRequestParam(@RequestParam(name = "rating", required = false) SortDirection ratingSortDirection, @RequestParam(name = "price", required = false) SortDirection priceSortDirection) {
         MovieRequestParam movieRequestParam = new MovieRequestParam();
 
         if (ratingSortDirection != null) {
@@ -80,18 +89,7 @@ public class MovieController {
             movieRequestParam.setSortDirection(priceSortDirection);
             movieRequestParam.setSortField("price");
         }
-
-        return ResponseEntity.ok(movieService.getByGenre(genreId, movieRequestParam));
-    }
-
-    @Autowired()
-    public void setMovieService(MovieService movieService) {
-        this.movieService = movieService;
-    }
-
-    @InitBinder
-    public void initBinder(final WebDataBinder webdataBinder) {
-        webdataBinder.registerCustomEditor(SortDirection.class, new SortDirectionConverter());
+        return movieRequestParam;
     }
 
 }
