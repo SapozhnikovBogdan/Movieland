@@ -1,5 +1,6 @@
 package com.sapozhnikov.movieland.dao.jdbc;
 
+import com.sapozhnikov.movieland.common.MovieRequestParam;
 import com.sapozhnikov.movieland.dao.MovieDao;
 import com.sapozhnikov.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.sapozhnikov.movieland.entity.Movie;
@@ -28,14 +29,25 @@ public class JdbcMovieDao implements MovieDao {
     }
 
     @Override
+    public List<Movie> getAll(MovieRequestParam movieRequestParam) {
+        return jdbcTemplate.query(SqlGenerator.getSortedSql(getAllMovieSql, movieRequestParam), MOVIE_ROW_MAPPER);
+    }
+
+    @Override
     public List<Movie> getRandom() {
         return jdbcTemplate.query(getRandomMovieSql, MOVIE_ROW_MAPPER);
     }
 
     @Override
     public List<Movie> getByGenre(int id) {
-        return jdbcTemplate.query(getMovieByGenreSql, new Object[]{id}, MOVIE_ROW_MAPPER);
+        return jdbcTemplate.query(getMovieByGenreSql, MOVIE_ROW_MAPPER, id);
     }
+
+    @Override
+    public List<Movie> getByGenre(int id, MovieRequestParam movieRequestParam) {
+        return jdbcTemplate.query(SqlGenerator.getSortedSql(getMovieByGenreSql, movieRequestParam), MOVIE_ROW_MAPPER, id);
+    }
+
 
     @Autowired
     public void setGetAllMovieSql(String getAllMovieSql) {

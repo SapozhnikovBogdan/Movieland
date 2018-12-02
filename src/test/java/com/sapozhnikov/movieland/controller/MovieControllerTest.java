@@ -80,6 +80,20 @@ public class MovieControllerTest {
     }
 
     @Test
+    public void testGetMoviesSorting() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
+        mockMvc.perform(get("/movie?rating=asc2"))
+                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/movie?rating=desc&price=desc"))
+                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/movie?rating=desc"))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/movie?price=desc"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void testGetRandomMovies() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
@@ -134,5 +148,19 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$[0].rating", equalTo(8.6)))
                 .andExpect(jsonPath("$[0].price", equalTo(145.90)))
                 .andExpect(jsonPath("$[0].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BOGJjNzZmMmUtMjljNC00ZjU5LWJiODQtZmEzZTU0MjBlNzgxL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1._SY209_CR0,0,140,209_.jpg")));
+    }
+
+    @Test
+    public void testGetMoviesByGenreSorting() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        int familyGenreId = 14;
+        mockMvc.perform(get("/movie/genre/{genreId}?rating=asc", familyGenreId))
+                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/movie/genre/{genreId}?rating=desc&price=desc", familyGenreId))
+                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/movie/genre/{genreId}?rating=desc", familyGenreId))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/movie/genre/{genreId}?price=desc", familyGenreId))
+                .andExpect(status().isOk());
     }
 }
