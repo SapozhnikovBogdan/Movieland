@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <changeSet author="BSapozhnikov" id="changelog-1.1_ins_data_to_country">
+        <insert tableName="country">
+            <column name="iso_code" value="JP"/>
+            <column name="name" value="Япония"/>
+        </insert>
+        <insert tableName="country">
+            <column name="iso_code" value="FR"/>
+            <column name="name" value="Франция"/>
+        </insert>
+        <insert tableName="country">
+            <column name="iso_code" value="US"/>
+            <column name="name" value="США"/>
+        </insert>
+        <insert tableName="country">
+            <column name="iso_code" value="GB"/>
+            <column name="name" value="Великобритания"/>
+        </insert>
+        <insert tableName="country">
+            <column name="iso_code" value="IT"/>
+            <column name="name" value="Италия"/>
+        </insert>
+        <insert tableName="country">
+            <column name="iso_code" value="DE"/>
+            <column name="name" value="Германия"/>
+        </insert>
+        <insert tableName="country">
+            <column name="iso_code" value="SP"/>
+            <column name="name" value="Испания"/>
+        </insert>
+        <rollback>
+            DELETE FROM country;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
