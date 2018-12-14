@@ -34,6 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @DirtiesContext
 public class MovieControllerTest {
+
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -159,6 +160,27 @@ public class MovieControllerTest {
         mockMvc.perform(get("/movie/genre/{genreId}?rating=desc", familyGenreId))
                 .andExpect(status().isOk());
         mockMvc.perform(get("/movie/genre/{genreId}?price=desc", familyGenreId))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getMovieById() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        int movieId = 11;
+
+        Movie movie = new Movie();
+        movie.setId(11);
+        movie.setNameRussian("Унесённые призраками");
+        movie.setNameNative("Sen to Chihiro no kamikakushi");
+        movie.setYearOfRelease("2001");
+        movie.setDescription("Маленькая Тихиро вместе с мамой и папой переезжают в новый дом. Заблудившись по дороге, они оказываются в странном пустынном городе, где их ждет великолепный пир. Родители с жадностью набрасываются на еду и к ужасу девочки превращаются в свиней, став пленниками злой колдуньи Юбабы, властительницы таинственного мира древних богов и могущественных духов.");
+        movie.setPrice(145.90);
+        movie.setRating(8.6);
+        movie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BOGJjNzZmMmUtMjljNC00ZjU5LWJiODQtZmEzZTU0MjBlNzgxL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1._SY209_CR0,0,140,209_.jpg");
+
+        when(movieDao.getById(11)).thenReturn(movie);
+
+        mockMvc.perform(get("/movie/{movieId}", movieId))
                 .andExpect(status().isOk());
     }
 }
