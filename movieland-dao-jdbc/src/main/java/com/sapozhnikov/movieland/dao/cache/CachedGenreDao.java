@@ -25,6 +25,11 @@ public class CachedGenreDao implements GenreDao {
         return new ArrayList<>(cachedGenres);
     }
 
+    @Override
+    public List<Genre> getByMovieId(int id) {
+        return jdbcGenreDao.getByMovieId(id);
+    }
+
     @PostConstruct
     @Scheduled(fixedDelayString = "${schedule.cache.genre.fixed_delay}",
                initialDelayString = "${schedule.cache.genre.initial_delay}")

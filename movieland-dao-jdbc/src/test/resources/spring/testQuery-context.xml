@@ -6,15 +6,15 @@
 
     <!--Movies's SQL-->
     <bean name="getAllMovieSql" class="java.lang.String">
-        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM movie"/>
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, description, rating, price, picture_path FROM movie"/>
     </bean>
 
     <bean name="getRandomMovieSql" class="java.lang.String">
-        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM movie_random ORDER BY RAND() limit 3"/>
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, description, rating, price, picture_path FROM movie_random ORDER BY RAND() limit 3"/>
     </bean>
 
     <bean name="getMovieByGenreSql" class="java.lang.String">
-        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM movie_by_genre mv join movie_genre mg on mv.id = mg.movie_id and mg.genre_id = ?"/>
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, description, rating, price, picture_path FROM movie_by_genre mv join movie_genre mg on mv.id = mg.movie_id and mg.genre_id = ?"/>
     </bean>
 
     <!--Genre's SQL-->

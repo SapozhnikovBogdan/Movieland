@@ -59,6 +59,12 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getByGenre(genreId, getMovieRequestParam(ratingSortDirection, priceSortDirection)));
     }
 
+    @GetMapping(path="/movie/{movieId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Movie getMovieById(@PathVariable int movieId){
+        logger.info("HTTP GET request came by path /movie/{}", movieId);
+        return movieService.getById(movieId);
+    }
+
     @Autowired()
     public void setMovieService(MovieService movieService) {
         this.movieService = movieService;

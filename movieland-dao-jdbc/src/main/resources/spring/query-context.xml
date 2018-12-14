@@ -6,20 +6,38 @@
 
     <!--Movies's SQL-->
     <bean name="getAllMovieSql" class="java.lang.String">
-        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM public.movie"/>
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, description, rating, price, picture_path FROM public.movie"/>
     </bean>
 
     <bean name="getRandomMovieSql" class="java.lang.String">
-        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM public.movie order by random() limit 3"/>
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, description, rating, price, picture_path FROM public.movie order by random() limit 3"/>
     </bean>
 
     <bean name="getMovieByGenreSql" class="java.lang.String">
-        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, rating, price, picture_path FROM public.movie mv join public.movie_genre mg on mv.id = mg.movie_id and mg.genre_id = ?"/>
+        <constructor-arg value="SELECT id, name_russian, name_native, year_of_release, description, rating, price, picture_path FROM public.movie mv join public.movie_genre mg on mv.id = mg.movie_id and mg.genre_id = ?"/>
+    </bean>
+
+    <bean id="getMovieByIdSql" class="java.lang.String">
+        <constructor-arg value="select id, name_russian, name_native, year_of_release, description, rating,price, picture_path from movie where id = ?"/>
     </bean>
 
     <!--Genre's SQL-->
     <bean name="getAllGenreSql" class="java.lang.String">
         <constructor-arg value="SELECT id, name FROM genre"/>
+    </bean>
+
+    <bean id="getGenreByMovieIdSql" class="java.lang.String">
+        <constructor-arg value="select g.id, g.name from genre g join movie_genre mg on g.id=mg.genre_id where mg.movie_id = ?"/>
+    </bean>
+
+    <!--Country's SQL-->
+    <bean id="getCountryByMovieIdSql" class="java.lang.String">
+        <constructor-arg value="select c.id,c.name from country c join movie_country mc on c.id=mc.country_id where mc.movie_id = ?"/>
+    </bean>
+
+    <!--Review's SQL-->
+    <bean id="getReviewByMovieIdSql" class="java.lang.String">
+        <constructor-arg value="select r.id, r.comment, r.user_id, u.email, u.nick_name from review r join users u on r.user_id = u.id where r.movie_id = ?"/>
     </bean>
 
 </beans>
